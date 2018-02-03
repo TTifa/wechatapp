@@ -1,0 +1,22 @@
+<view class="container">
+	<!-- 侧边栏 -->
+	<view class="sidebar" style="height: {{sidebarHeight}}px;">
+		<text wx:for="{{topCategories}}" wx:key="Id" bindtap="tapTopCategory" data-object-id="{{item.Id}}" data-index="{{index}}" class="{{highlight[index]}}">{{item.Name}}</text>
+	</view>
+	<!-- right -->
+	<view class="main">
+		<!-- banner -->
+		<image class="banner" src="{{banner.Images}}" mode="widthFix" bindtap="showGoods" data-link="{{banner.LinkUrl}}"/>
+		<!-- GridView -->
+		<view class="gridview">
+			<dl wx:for="{{subCategories}}" wx:key="objectId">
+				<dt>
+					<image src="{{item.Avatar}}" mode="scaleToFit" bindtap="avatarTap" data-object-id="{{item.Id}}" style="width:{{imageWidth}}px; height: {{imageWidth}}px;"/>
+				</dt>
+				<dd>
+					<text>{{item.title}}</text>
+				</dd>
+			</dl>
+		</view>
+	</view>
+</view>
