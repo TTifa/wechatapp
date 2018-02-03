@@ -1,5 +1,8 @@
 const API = require('../../../utils/apiclient.js')
 Page({
+	data: {
+		addressObjects: []
+	},
 	add: function () {
 		wx.navigateTo({
 			url: '../add/add'
@@ -14,21 +17,21 @@ Page({
 		// 取得下标
 		var index = parseInt(e.currentTarget.dataset.index);
 		// 遍历所有地址对象设为非默认
-		var addressObjects = that.data.addressObjects;
-		for (var i = 0; i < addressObjects.length; i++) {
-			// 判断是否为当前地址，是则传true
-			addressObjects[i].set('isDefault', i == index)
-		}
-		console.log(addressObjects);
-		return;
-		API.Post('/api/update', {}, (res) => {
-			console.log(res);
-			// 设置成功提示
-			wx.showToast({
-				title: '设置成功',
-				icon: 'success',
-				duration: 2000
-			});
+		var addressArray = that.data.addressObjects;
+		addressArray[index].State = 1;
+		var address = addressArray[index];
+		API.Post('/api/address', address, (res) => {
+			if (res.status == 1) {
+				// 设置成功提示
+				wx.showToast({
+					title: '设置成功',
+					icon: 'success',
+					duration: 2000
+				});
+				that.setData({
+					addressObjects: addressArray
+				})
+			}
 		})
 	},
 	edit: function (e) {
@@ -54,7 +57,6 @@ Page({
 			success: function (res) {
 				if (res.confirm) {
 					// API.Post('/api/delete',{userId:1,addressId:address.Id},(e)=>{
-
 					// })
 
 					// 删除成功提示
