@@ -39,11 +39,10 @@ Page({
 		});
 	},
 	confirmOrder: function () {
-
-		wx.navigateTo({
-			url: '/pages/order/payment/payment?orderId=D201802021457320001&totalFee=5898'
-		});
-		return;
+		// wx.navigateTo({
+		// 	url: '/pages/order/payment/payment?orderId=D201802021457320001&totalFee=5898'
+		// });
+		// return;
 		// submit order
 		var carts = this.data.carts;
 		var that = this;
@@ -66,7 +65,7 @@ Page({
 				return;
 			}
 			wx.navigateTo({
-				url: '../../payment/payment?orderId=' + res.data.OrderId + '&totalFee=' + that.data.Amount
+				url: '/pages/order/payment/payment?orderId=' + res.data.OrderId + '&totalFee=' + that.data.Amount
 			});
 		})
 	},

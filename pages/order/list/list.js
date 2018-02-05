@@ -1,117 +1,50 @@
-/**
- *
- * 配套视频教程请移步微信->小程序->灵动云课堂
- * 关注订阅号【huangxiujie85】，第一时间收到教程推送
- *
- * @link http://blog.it577.net
- * @author 黄秀杰
- */
-
-const AV = require('../../../utils/av-weapp.js')
-const utils = require('../../../utils/utils.js')
+const API = require('../../../utils/apiclient.js')
 Page({
 	data: {
 		orders: [],
+		orderStatus: -1
 	},
 	onLoad: function (options) {
 		// 订单状态，已下单为0，已付为1，已发货为2，已收货为3
 		var status = parseInt(options.status);
-		// 存为全局变量，控制支付按钮是否显示
+		console.log(status);
 		this.setData({
-			status: status
+			orderStatus: status
 		});
 	},
-	onShow: function() {
+	onShow: function () {
 		this.reloadData();
 	},
-	reloadData: function() {
-		// 声明一个class
-		// var Address = AV.Object.extend('Address');
-		// Object.defineProperty(
-		// 	Address.prototype, 'detail', 
-		// 	{
-		// 		get: function(){ 
-		// 			return this.get('detail'); 
-		// 		}, 
-		// 		set: function(value) { 
-		// 			this.set('detail', value); 
-		// 		} 
-		// 	}
-		// );
+	reloadData: function () {
 		var that = this;
-		var user = AV.User.current();
-		var query = new AV.Query('Order');	
-		query.include('buys');
-		query.include('address');
-		query.equalTo('user', user);
-		query.equalTo('status', this.data.status);
-		query.descending('createdAt');
-		query.find().then(function (orderObjects) {
-			orderObjects = utils.dateFormat(orderObjects);
-			that.setData({
-				orders: orderObjects
-			});
-			// 存储地址字段
-			for (var i = 0; i < orderObjects.length; i++) {
-				var address = orderObjects[i].get('address');
-				// i为0是，左值为false故取右值，i>=0时，左值为true故取左值
-				var addressArray = that.data.addressArray || [];
-				addressArray.push(address);
+		API.Post('/api/order/list', {
+			userId: 1,
+			pageIndex: 1,
+			pageSize: 5,
+			status: that.data.orderStatus
+		}, (res) => {
+			if (res.status == 1) {
 				that.setData({
-					addressArray: addressArray
-				});
+					orders: res.data
+				})
 			}
-			// loop search order, fetch the Buy objects
-			for (var i = 0; i < orderObjects.length; i++) {
-				var order = orderObjects[i];
-				var queryMapping = new AV.Query('OrderGoodsMap');
-				queryMapping.include('goods');
-				queryMapping.equalTo('order', order);
-				queryMapping.find().then(function (mappingObjects) {
-					var mappingArray = [];
-					for (var j = 0; j < mappingObjects.length; j++) {
-						var mappingObject = mappingObjects[j];
-						var mapping = {
-							objectId: mappingObject.get('goods').get('objectId'),
-							avatar: mappingObject.get('goods').get('avatar'),
-							title: mappingObject.get('goods').get('title'),
-							price: mappingObject.get('goods').get('price'),
-							quantity: mappingObject.get('quantity')
-						};
-						mappingArray.push(mapping);
-					}
-					// 找出orderObjectId所在的索引位置，来得到k的值
-					var k = 0;
-					var orders = that.data.orders;
-					for (var index = 0; index < orders.length; index++) {
-						var order = orders[index];
-						if (order.get('objectId') == mappingObject.get('order').get('objectId')) {
-							k = index;
-							break;
-						}
-					}
-					var mappingData = that.data.mappingData == undefined ? [] : that.data.mappingData;
-					mappingData[k] = mappingArray;
-					that.setData({
-						mappingData: mappingData
-					});
-				});
-			}
-		});
+		})
 	},
-	pay: function(e) {
+	pay: function (e) {
 		var objectId = e.currentTarget.dataset.objectId;
 		var totalFee = e.currentTarget.dataset.totalFee;
+		var payurl = '../payment/payment?orderId=' + objectId + '&totalFee=' + totalFee;
+		console.log(payurl); return;
 		wx.navigateTo({
-			url: '../payment/payment?orderId=' + objectId + '&totalFee=' + totalFee
+			url: payurl
 		});
 	},
-	receive: function(e) {
+	receive: function (e) {
 		var that = this;
 		wx.showModal({
 			title: '请确认',
 			content: '确认要收货吗',
-			success: function(res) {
+			success: function (res) {
 				if (res.confirm) {
 					var objectId = e.currentTarget.dataset.objectId;
 					var order = new AV.Object.createWithoutData('Order', objectId);
@@ -122,7 +55,7 @@ Page({
 						});
 						that.reloadData();
 					});
-					
+
 				}
 			}
 		})

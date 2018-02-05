@@ -20,6 +20,17 @@ page {
 	margin: 0 5px;
 }
 
+.order-footer button {
+	font-size: 12px;
+	float:	right;
+	margin: 0 5px;
+}
+
+.empty-list{
+	text-align: center;
+	margin:auto;
+}
+
 /*每行单元格*/
 .carts-item {
 	display: flex;
@@ -28,7 +39,7 @@ page {
 	/*width属性解决标题文字太短而缩略图偏移*/
 	width:100%;
 	border-bottom: 1px solid #eee;
-	padding: 30rpx 0;
+	padding: 25rpx 10rpx;
 }
 
 /*左部图片*/

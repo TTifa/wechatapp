@@ -10,7 +10,8 @@
     "pages/order/checkout/checkout",
     "pages/order/payment/payment",
     "pages/address/add/add",
-    "pages/address/list/list"
+    "pages/address/list/list",
+    "pages/order/list/list"
   ],
   "window": {
     "backgroundTextStyle": "light",

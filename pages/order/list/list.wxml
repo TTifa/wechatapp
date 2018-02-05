@@ -1,30 +1,34 @@
 <view class="order-item" wx:for="{{orders}}" wx:key="">
-	<view wx:for="{{mappingData[index]}}" wx:for-item="mapping" wx:key="" class="carts-item" bindtap="showGoods" data-object-id="{{mapping.objectId}}">
+	<view wx:for="{{item.Goods}}" wx:for-item="goods" wx:key="" class="carts-item" bindtap="showGoods" data-object-id="{{goods.Id}}">
 		<view>
-			<!-- 缩略图 -->
-			<image class="carts-image" src="{{mapping.avatar}}" mode="aspectFill"/>
+			<image class="carts-image" src="{{goods.Avatar}}" mode="aspectFill"/>
 		</view>
 		<view class="carts-text">
 			<!-- 商品标题 -->
-			<text class="carts-title">{{mapping.title}}</text>
+			<text class="carts-title">{{goods.GoodsName}}</text>
 			<view class="carts-subtitle">
 				<!-- 价格 -->
-				<text class="carts-price">{{mapping.price}}</text>
-				<text>x{{mapping.quantity}}</text>
+				<text class="carts-price">{{goods.Price}}</text>
+				<text>x{{goods.Quantity}}</text>
 			</view>
 		</view>
 	</view>
 	<view class="order-footer">
-		<text>实付金额 {{item.amount}}</text>
-		<text bindtap="pay" data-object-id="{{item.objectId}}" data-total-fee="{{item.amount}}" class="{{status != 0 ? 'hidden': ''}}">支付</text>
-		<text bindtap="receive" data-object-id="{{item.objectId}}" class="{{status != 2 ? 'hidden': ''}}">确认收货</text>
-		
-		<text wx:if="{{status == 3}}" bindtap="evaluate" data-object-id="{{item.objectId}}" data-index="{{index}}">评价</text>
-		<text>{{item.createdAt}}</text>
+		<text>实付金额</text>
+		<text>￥ {{item.Amount}}</text>
+		<button bindtap="pay" wx:if="item.State == 0" size="mini" type="primary" data-object-id="{{item.OrderId}}" data-total-fee="{{item.Amount}}" >支付</button>
+		<button bindtap="receive" wx:elif="item.State==2" size="mini" type="primary" data-object-id="{{item.OrderId}}" >确认收货</button>
+		<button bindtap="evaluate" wx:else="item.State==3" size="mini" type="primary" data-object-id="{{item.OrderId}}" data-index="{{index}}">评价</button>
+	</view>
+	<view class="order-footer">
+		<text>下单时间</text>
+		<text>{{item.CreateTime}}</text>
 	</view>
 	<view class="order-footer">
 		<text>收货地址</text>
-		<text>{{addressArray[index].detail}}</text>
+		<text>{{item.Address}}</text>
 	</view>
-
+</view>
+<view wx:if="{{orders.length<=0}}" class="empty-list">
+	<text>暂无订单数据</text>
 </view>
