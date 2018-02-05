@@ -30,5 +30,7 @@
 	</view>
 </view>
 <view wx:if="{{orders.length<=0}}" class="empty-list">
-	<text>暂无订单数据</text>
+	<text>
+		暂无订单数据
+	</text>
 </view>

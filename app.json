@@ -11,7 +11,8 @@
     "pages/order/payment/payment",
     "pages/address/add/add",
     "pages/address/list/list",
-    "pages/order/list/list"
+    "pages/order/list/list",
+    "pages/member/share/share"
   ],
   "window": {
     "backgroundTextStyle": "light",

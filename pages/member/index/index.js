@@ -88,7 +88,7 @@ Page({
 	},
 	navigateToShare: function () {
 		wx.navigateTo({
-			url: '/pages/member/share/share'
+			url: '/pages/member/share/share?uid=1'
 		});
 	}
 })

@@ -1,16 +1,31 @@
-/**
- *
- * 配套视频教程请移步微信->小程序->灵动云课堂
- * 关注订阅号【huangxiujie85】，第一时间收到教程推送
- *
- * @link http://blog.it577.net
- * @author 黄秀杰
- */
-
+const API = require('../../../utils/apiclient.js')
 Page({
+	data: {
+		QRCodeUrl: '',
+		uid: 0
+	},
 	onLoad: function (options) {
 		this.setData({
-			uid: 123456
+			uid: options.uid
 		});
+		this.getQRCode(options.uid);
+	},
+	getQRCode: function (uid) {
+		var that = this;
+		API.Post('/api/wechats/qrcode', {
+			id: 1,
+			type: 0,
+			scene: uid
+		}, (res) => {
+			console.log(res);
+			if (res.status == 1) {
+				that.setData({
+					QRCodeUrl: res.data
+				})
+			}
+		})
+	},
+	refreshQRCode: function () {
+		this.getQRCode(this.data.uid);
 	}
 });
