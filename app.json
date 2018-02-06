@@ -12,7 +12,8 @@
     "pages/address/add/add",
     "pages/address/list/list",
     "pages/order/list/list",
-    "pages/member/share/share"
+    "pages/member/share/share",
+    "pages/member/aboutus/aboutus"
   ],
   "window": {
     "backgroundTextStyle": "light",

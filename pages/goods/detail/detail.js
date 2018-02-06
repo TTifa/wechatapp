@@ -8,13 +8,12 @@ Page({
 	},
 	onLoad: function (options) {
 		that = this;
-		console.log(options);
 		var goodsId = options.id;
 		this.getGoodsById(goodsId);
 		this.getEvaluateByGoods(goodsId);
 	},
 	getGoodsById: function (goodsId) {
-		API.Get('/api/goods', { id: 3 }, (e) => {
+		API.Get('/api/goods', { id: goodsId }, (e) => {
 			if (e.status == 1) {
 				e.data.images = JSON.parse(e.data.images);
 				e.data.detail = JSON.parse(e.data.detail);

@@ -1,53 +1,84 @@
-//index.js
-//获取应用实例
-const app = getApp()
-
+const API = require('../../utils/apiclient.js')
 Page({
   data: {
-    motto: 'Hello World',
-    userInfo: {},
-    hasUserInfo: false,
-    canIUse: wx.canIUse('button.open-type.getUserInfo')
+    banner: [],
+    goods: [],
+    bannerHeight: Math.ceil(290.0 / 750.0 * getApp().screenWidth)
   },
-  //事件处理函数
-  bindViewTap: function() {
-    wx.navigateTo({
-      url: '../logs/logs'
-    })
+  onLoad: function (options) {
+    this.loadBanner();
+    this.loadMainGoods();
+    this.getInviteCode(options);
   },
-  onLoad: function () {
-    if (app.globalData.userInfo) {
-      this.setData({
-        userInfo: app.globalData.userInfo,
-        hasUserInfo: true
-      })
-    } else if (this.data.canIUse){
-      // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-      // 所以此处加入 callback 以防止这种情况
-      app.userInfoReadyCallback = res => {
-        this.setData({
-          userInfo: res.userInfo,
-          hasUserInfo: true
-        })
-      }
-    } else {
-      // 在没有 open-type=getUserInfo 版本的兼容处理
-      wx.getUserInfo({
-        success: res => {
-          app.globalData.userInfo = res.userInfo
-          this.setData({
-            userInfo: res.userInfo,
-            hasUserInfo: true
-          })
-        }
+  getInviteCode: function (options) {
+    if (options.uid != undefined) {
+      wx.showToast({
+        title: '来自用户:' + options.uid + '的分享',
+        icon: 'success',
+        duration: 2000
       })
     }
   },
-  getUserInfo: function(e) {
-    app.globalData.userInfo = e.detail.userInfo
-    this.setData({
-      userInfo: e.detail.userInfo,
-      hasUserInfo: true
+  loadBanner: function () {
+    var that = this;
+    API.Get('/api/ads/banner', { match: `index:0` }, (e) => {
+      if (e.status != 1) {
+        console.log(e.msg);
+        return;
+      }
+      var array = e.data;
+      that.setData({
+        banner: array
+      });
     })
+  },
+  loadMainGoods: function () {
+    var that = this;
+    //获取热卖产品
+    API.Post('/api/goods', {
+      pageIndex: 1,
+      pageSize: 4,
+      hot: true
+    }, (res) => {
+      if (res.status == 1) {
+        that.setData({
+          goods: res.data
+        })
+      }
+    })
+
+  },
+  showDetail: function (e) {
+    var index = e.currentTarget.dataset.index;
+    var goodsId = this.data.goods[index].Id;
+    wx.navigateTo({
+      url: "../goods/detail/detail?id=" + goodsId
+    });
+  },
+  showCategories: function () {
+    // wx.navigateTo({
+    // 	url: "../category/category"
+    // });
+    wx.switchTab({
+      url: "../category/category"
+    });
+  },
+  showOrders: function () {
+    wx.navigateTo({
+      url: "../order/list/list?status=0"
+    });
+  },
+  onShareAppMessage: function () {
+    return {
+      title: 'Farwind开源电商',
+      desc: 'develop by farwind',
+      path: '/pages/index/index?uid=4719784'
+    }
+  },
+  showGoods: function (e) {
+    var url = e.currentTarget.dataset.link;
+    wx.navigateTo({
+      url: url
+    });
   }
 })

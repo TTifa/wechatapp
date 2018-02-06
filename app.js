@@ -8,18 +8,19 @@ App({
 
     // 设备信息
     var that = this;
-		wx.getSystemInfo({
-			success: function(res) {
-				that.screenWidth = res.windowWidth;
-				that.screenHeight = res.windowHeight;
-				that.pixelRatio = res.pixelRatio;
-			}
-		});
+    wx.getSystemInfo({
+      success: function (res) {
+        that.screenWidth = res.windowWidth;
+        that.screenHeight = res.windowHeight;
+        that.pixelRatio = res.pixelRatio;
+      }
+    });
 
     // 登录
     wx.login({
       success: res => {
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
+        that.globalData.code = res.code;
       }
     })
     // 获取用户信息
@@ -44,6 +45,7 @@ App({
     })
   },
   globalData: {
-    userInfo: null
+    userInfo: null,
+    code: ''
   }
 })

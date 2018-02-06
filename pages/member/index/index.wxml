@@ -32,4 +32,11 @@
 	<image src="../../../images/icon_aboutus.png" />
 	<text>关于我们</text>
 </view>
-<button wx:if="{{userInfo}}" bindtap="logout" type="warn" class="logout">退出登录</button>
+<view bindtap="navigateToLog" class="tableviewcell">
+	<image src="../../../images/icon_aboutus.png" />
+	<text>启动日志</text>
+</view>
+<!--
+<button wx:if="{{userInfo}}" bindtap="signOut" type="warn" class="logout">退出登录</button>
+<button wx:else="{{userInfo}}" bindtap="signIn" type="warn" class="logout">登录</button>
+-->

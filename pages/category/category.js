@@ -76,7 +76,7 @@ Page({
         });
     },
     getBanner: function (parent) {
-        API.Get('/api/category/banner', { id: parent }, (e) => {
+        API.Get('/api/ads/category', { id: parent }, (e) => {
             if (e.status != 1) {
                 console.log(e.msg);
                 //Toast.toast(this, e.msg,null,10);

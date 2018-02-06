@@ -14,6 +14,9 @@ const Request = function (method, action, param, callback) {
             'content-type': contentType
         },
         success: function (res) {
+            if (res.data.status != 1)
+                console.log(JSON.stringify(res));
+
             callback && callback(res.data);
         }
     })

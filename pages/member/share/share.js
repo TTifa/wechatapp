@@ -12,7 +12,7 @@ Page({
 	},
 	getQRCode: function (uid) {
 		var that = this;
-		API.Post('/api/wechats/qrcode', {
+		API.Post('/api/wechat/qrcode', {
 			id: 1,
 			type: 0,
 			scene: uid

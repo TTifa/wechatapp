@@ -1,13 +1,32 @@
-<!--index.wxml-->
-<view class="container">
-  <view class="userinfo">
-    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
-    <block wx:else>
-      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
-      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-    </block>
-  </view>
-  <view class="usermotto">
-    <text class="user-motto">{{motto}}</text>
-  </view>
+<swiper indicator-dots="true"
+  autoplay="true" interval="5000" duration="1000" style="height:{{bannerHeight}}px;">
+  <block wx:for="{{banner}}" wx:key="">
+    <swiper-item>
+      <image src="{{item.Images}}" mode="aspectFill" class="swiper-image" data-link="{{item.LinkUrl}}" bindtap="showGoods"/>
+    </swiper-item>
+  </block>
+</swiper>
+<view class="func-area">
+	<view bindtap="showCategories">
+		<image src="../../images/icon_all.png" mode="aspectFill" class="orange" />
+		<text>全部分类</text>
+	</view>
+	<view bindtap="showOrders">
+		<image src="../../images/icon_shopping.png" mode="aspectFill" class="blue" />
+		<text>我的订单</text>
+	</view>
+</view>
+<!-- hot goods -->
+<view class="container-goods">
+	<text class="caption">热卖推荐</text>
+	<view class="main-goods">
+		<view class="single-goods" wx:for="{{goods}}" wx:key="" bindtap="showDetail" data-index="{{index}}">
+			<image class="avatar" src="{{item.Avatar}}" mode="aspectFill" />
+			<text class="title">{{item.Name}}</text>
+			<view class="summary">
+				<text class="price">￥{{item.Price}}</text>
+				<text class="sale">已售{{item.SalesVolume}}件</text>
+			</view>
+		</view>
+	</view>
 </view>

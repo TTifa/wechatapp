@@ -8,20 +8,38 @@ Page({
 			url: '../../address/list/list'
 		});
 	},
+	navigateToLog: function () {
+		wx.navigateTo({
+			url: '../../logs/logs'
+		});
+	},
 	navigateToOrder: function (e) {
 		var status = e.currentTarget.dataset.status
 		wx.navigateTo({
 			url: '../../order/list/list?status=' + status
 		});
 	},
-	logout: function () {
-		AV.User.logOut();
+	signOut: function () {
 		wx.showToast({
 			title: '退出成功'
 		});
+		app.globalData.userInfo = null;
 		this.setData({
-			userInfo: ''
+			userInfo: null
 		});
+	},
+	signIn: function () {
+		wx.getUserInfo({
+			success: res => {
+				wx.showToast({
+					title: '退出成功'
+				});
+				app.globalData.userInfo = res.userInfo
+				this.setData({
+					userInfo: res.userInfo,
+				})
+			}
+		})
 	},
 	onShow: function () {
 		this.loadUser();
