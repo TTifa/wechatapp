@@ -1,0 +1,36 @@
+<view class="page">
+    <view class="page__bd">
+        <view class="weui-toptips weui-toptips_warn" wx:if="{{showTopTips}}">{{tipText}}</view>
+        <view class="weui-cells__title">注册账号</view>
+            <view class="weui-cells weui-cells_after-title">
+                <view class="weui-cell weui-cell_input">
+                    <view class="weui-cell__hd">
+                        <view class="weui-label">用户名</view>
+                    </view>
+                    <view class="weui-cell__bd">
+                        <input class="weui-input" maxlength="20" id="username" bindblur="setValue" placeholder="请输入登录用户名"/>
+                    </view>
+                </view>
+                <view class="weui-cell weui-cell_input">
+                    <view class="weui-cell__hd">
+                        <view class="weui-label">密码</view>
+                    </view>
+                    <view class="weui-cell__bd">
+                        <input class="weui-input" password="true" id="password" bindblur="setValue" maxlength="20" placeholder="请输入登录密码"/>
+                    </view>
+                </view>
+                <view class="weui-cell weui-cell_input">
+                    <view class="weui-cell__hd">
+                        <view class="weui-label">确认密码</view>
+                    </view>
+                    <view class="weui-cell__bd">
+                        <input class="weui-input" password="true" id="repassword" bindblur="setValue" maxlength="20" placeholder="请再次输入登录密码"/>
+                    </view>
+                </view>
+            </view>
+        <view class="weui-cells__tips">底部说明文字底部说明文字</view>
+        <view class="weui-btn-area">
+            <button class="weui-btn" type="primary" bindtap="register">注册</button>
+        </view>
+    </view>
+</view>

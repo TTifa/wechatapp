@@ -13,7 +13,8 @@
     "pages/address/list/list",
     "pages/order/list/list",
     "pages/member/share/share",
-    "pages/member/aboutus/aboutus"
+    "pages/member/aboutus/aboutus",
+    "pages/member/register/register"
   ],
   "window": {
     "backgroundTextStyle": "light",

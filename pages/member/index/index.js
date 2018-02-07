@@ -108,5 +108,10 @@ Page({
 		wx.navigateTo({
 			url: '/pages/member/share/share?uid=1'
 		});
+	},
+	navigateToRegister: function () {
+		wx.navigateTo({
+			url: '/pages/member/register/register'
+		});
 	}
 })

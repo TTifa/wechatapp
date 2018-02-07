@@ -1,4 +1,5 @@
 //app.js
+const API = require('/utils/apiclient.js')
 App({
   onLaunch: function () {
     // 展示本地存储能力
@@ -20,9 +21,21 @@ App({
     wx.login({
       success: res => {
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
-        that.globalData.code = res.code;
+        var code = res.code;
+        //get openid
+        API.Post('/api/wxopen/openid', {
+          id: that.globalData.waId,
+          jsCode: code
+        }, (e) => {
+          if (e.status == 1) {
+            that.globalData.openid = e.data;
+            if (that.globalData.userInfo)
+              that.signIn(1);
+          }
+        })
       }
     })
+
     // 获取用户信息
     wx.getSetting({
       success: res => {
@@ -32,7 +45,7 @@ App({
             success: res => {
               // 可以将 res 发送给后台解码出 unionId
               this.globalData.userInfo = res.userInfo
-
+              that.signIn(2);
               // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
               // 所以此处加入 callback 以防止这种情况
               if (this.userInfoReadyCallback) {
@@ -44,8 +57,29 @@ App({
       }
     })
   },
+  signIn: function (i) {
+    console.log(i);
+    if (!this.globalData.userInfo || !this.globalData.openid)
+      return;
+
+    //如果已经注册获取token
+    var param = this.globalData.userInfo;
+    param.openid = this.globalData.openid;
+    param.WAId = this.globalData.waId;
+    var that = this;
+    API.Post('/api/wxopen/signin', param, (e) => {
+      if (e.status == 1) {
+        var userinfo = that.globalData.userInfo;
+        userinfo.userid = e.data.Uid;
+        userinfo.token = e.data.Token;
+        //that.globalData.userInfo = param;
+        console.log(that.globalData.userInfo);
+      }
+    })
+  },
   globalData: {
     userInfo: null,
-    code: ''
+    openid: '',
+    waId: 2
   }
 })
