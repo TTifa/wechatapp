@@ -29,8 +29,7 @@ App({
         }, (e) => {
           if (e.status == 1) {
             that.globalData.openid = e.data;
-            if (that.globalData.userInfo)
-              that.signIn(1);
+            that.signIn();
           }
         })
       }
@@ -45,7 +44,7 @@ App({
             success: res => {
               // 可以将 res 发送给后台解码出 unionId
               this.globalData.userInfo = res.userInfo
-              that.signIn(2);
+              that.signIn();
               // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
               // 所以此处加入 callback 以防止这种情况
               if (this.userInfoReadyCallback) {
@@ -57,23 +56,19 @@ App({
       }
     })
   },
-  signIn: function (i) {
-    console.log(i);
+  // get token
+  signIn: function () {
     if (!this.globalData.userInfo || !this.globalData.openid)
       return;
 
-    //如果已经注册获取token
-    var param = this.globalData.userInfo;
-    param.openid = this.globalData.openid;
-    param.WAId = this.globalData.waId;
+    var userinfo = this.globalData.userInfo;
+    userinfo.openid = this.globalData.openid;
+    userinfo.WAId = this.globalData.waId;
     var that = this;
-    API.Post('/api/wxopen/signin', param, (e) => {
+    API.Post('/api/wxopen/signin', userinfo, (e) => {
       if (e.status == 1) {
-        var userinfo = that.globalData.userInfo;
-        userinfo.userid = e.data.Uid;
+        userinfo.userid = e.data.UserId;
         userinfo.token = e.data.Token;
-        //that.globalData.userInfo = param;
-        console.log(that.globalData.userInfo);
       }
     })
   },
