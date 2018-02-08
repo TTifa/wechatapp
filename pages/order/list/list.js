@@ -34,7 +34,6 @@ Page({
 		var objectId = e.currentTarget.dataset.objectId;
 		var totalFee = e.currentTarget.dataset.totalFee;
 		var payurl = '../payment/payment?orderId=' + objectId + '&totalFee=' + totalFee;
-		console.log(payurl); return;
 		wx.navigateTo({
 			url: payurl
 		});
