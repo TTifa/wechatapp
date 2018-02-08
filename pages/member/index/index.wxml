@@ -36,6 +36,10 @@
 	<image src="../../../images/icon_aboutus.png" />
 	<text>启动日志</text>
 </view>
+<view bindtap="navigateToIcon" class="tableviewcell">
+	<image src="../../../images/icon_aboutus.png" />
+	<text>iconfonts</text>
+</view>
 <view wx-if="{{!userInfo.userid}}" bindtap="navigateToRegister" class="tableviewcell">
 	<image src="../../../images/icon_aboutus.png" />
 	<text>注册</text>

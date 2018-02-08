@@ -1,0 +1,27 @@
+@import '/style/iconfont.wxss';
+
+.icon_lists{
+  width: 100% !important;
+
+}
+
+.icon_lists .item{
+  float:left;
+  width: 150rpx;
+  height:270rpx;
+  text-align: center;
+  list-style: none !important;
+}
+.icon_lists .icon{
+  font-size: 63rpx;
+  line-height: 150rpx;
+  margin: 10rpx 0;
+  color:#333;
+  -webkit-transition: font-size 0.25s ease-out 0s;
+  -moz-transition: font-size 0.25s ease-out 0s;
+  transition: font-size 0.25s ease-out 0s;
+
+}
+.icon_lists .icon:hover{
+  font-size: 150rpx;
+}

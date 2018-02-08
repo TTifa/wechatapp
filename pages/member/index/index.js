@@ -113,5 +113,10 @@ Page({
 		wx.navigateTo({
 			url: '/pages/member/register/register'
 		});
+	},
+	navigateToIcon: function () {
+		wx.navigateTo({
+			url: '/pages/component/icon/icon'
+		});
 	}
 })

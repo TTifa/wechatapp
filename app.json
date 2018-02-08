@@ -14,7 +14,8 @@
     "pages/order/list/list",
     "pages/member/share/share",
     "pages/member/aboutus/aboutus",
-    "pages/member/register/register"
+    "pages/member/register/register",
+    "pages/component/icon/icon"
   ],
   "window": {
     "backgroundTextStyle": "light",

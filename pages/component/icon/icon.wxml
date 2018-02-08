@@ -1,0 +1,184 @@
+<view class="icon_lists">
+    <view class="item">
+        <view class="icon iconfont icon-gouwuche"></view>
+        <view>购物车</view>
+    </view>
+    <view class="item">
+        <view class="icon iconfont icon-gouwuchetianjia"></view>
+        <view>购物车添加</view>
+    </view>
+    
+    <view class="item">
+        <view class="icon iconfont icon-erweima"></view>
+        <view>二维码</view>
+    </view>
+    <view class="item">
+        <view class="icon iconfont icon-shoucang"></view>
+        <view>收藏</view>
+    </view>
+    <view class="item">
+        <view class="icon iconfont icon-yishoucang"></view>
+        <view>已收藏</view>
+    </view>
+    <view class="item">
+        <view class="icon iconfont icon-lajixiang"></view>
+        <view>垃圾箱</view>
+    </view>
+    <view class="item">
+        <view class="icon iconfont icon-lianjie"></view>
+        <view>链接</view>
+    </view>
+    <view class="item">
+        <view class="icon iconfont icon-naozhong"></view>
+        <view>闹钟</view>
+    </view>
+    <view class="item">
+        <view class="icon iconfont icon-saoyisao"></view>
+        <view>扫一扫</view>
+    </view>
+    <view class="item">
+        <view class="icon iconfont icon-shezhi"></view>
+        <view>设置</view>
+    </view>
+    <view class="item">
+        <view class="icon iconfont icon-shengyin"></view>
+        <view>声音</view>
+    </view>
+    <view class="item">
+        <view class="icon iconfont icon-shijian"></view>
+        <view>时间</view>
+    </view>
+    <view class="item">
+        <view class="icon iconfont icon-shouhuodizhi"></view>
+        <view>收货地址</view>
+    </view>
+    <view class="item">
+        <view class="icon iconfont icon-shouye"></view>
+        <view>首页</view>
+    </view>
+    <view class="item">
+        <view class="icon iconfont icon-shuaxin"></view>
+        <view>刷新</view>
+    </view>
+    <view class="item">
+        <view class="icon iconfont icon-sousuo"></view>
+        <view>搜索</view>
+    </view>
+    <view class="item">
+        <view class="icon iconfont icon-tishi"></view>
+        <view>提示</view>
+    </view>
+    <view class="item">
+        <view class="icon iconfont icon-wancheng"></view>
+        <view>完成</view>
+    </view>
+
+    <view class="item">
+        <view class="icon iconfont icon-wodedingdan"></view>
+        <view>我的订单</view>
+    </view>
+    <view class="item">
+        <view class="icon iconfont icon-zhaoxiangji"></view>
+        <view>照相机</view>
+    </view>
+
+
+    <view class="item">
+        <view class="icon iconfont icon-suo"></view>
+        <view>锁</view>
+    </view>
+    <view class="item">
+        <view class="icon iconfont icon-wodefankui"></view>
+        <view>我的反馈</view>
+    </view>
+    <view class="item">
+        <view class="icon iconfont icon-hongbao"></view>
+        <view>红包</view>
+    </view>
+    <view class="item">
+        <view class="icon iconfont icon-wode"></view>
+        <view>我的</view>
+    </view>
+    <view class="item">
+        <view class="icon iconfont icon-youhuiquan"></view>
+        <view>优惠券</view>
+    </view>
+    <view class="item">
+        <view class="icon iconfont icon-shangfan"></view>
+        <view>上翻</view>
+    </view>
+    <view class="item">
+        <view class="icon iconfont icon-xiafan"></view>
+        <view>下翻</view>
+    </view>
+    <view class="item">
+        <view class="icon iconfont icon-jiantoushang"></view>
+        <view>上箭头</view>
+    </view>
+    <view class="item">
+        <view class="icon iconfont icon-jiantouxia"></view>
+        <view>下箭头</view>
+    </view>
+    <view class="item">
+        <view class="icon iconfont icon-jiantouyou"></view>
+        <view>右箭头</view>
+    </view>
+    <view class="item">
+        <view class="icon iconfont icon-jiantouzuo"></view>
+        <view>左箭头</view>
+    </view>
+
+    <view class="item">
+        <view class="icon iconfont icon-yanjing"></view>
+        <view>眼睛</view>
+    </view>
+    <view class="item">
+        <view class="icon iconfont icon-yijianfankui"></view>
+        <view>意见反馈</view>
+    </view>
+    <view class="item">
+        <view class="icon iconfont icon-cuowu"></view>
+        <view>错误</view>
+    </view>
+    <view class="item">
+        <view class="icon iconfont icon-zhengque"></view>
+        <view>正确</view>
+    </view>
+    <view class="item">
+        <view class="icon iconfont icon-xiaoxizhongxin"></view>
+        <view>消息中心</view>
+    </view>
+    <view class="item">
+        <view class="icon iconfont icon-lingcunwei"></view>
+        <view>另存为</view>
+    </view>
+    <view class="item">
+        <view class="icon iconfont icon-new"></view>
+        <view>new</view>
+    </view>
+    <view class="item">
+        <view class="icon iconfont icon-huo"></view>
+        <view>火</view>
+    </view>
+    <view class="item">
+        <view class="icon iconfont icon-301"></view>
+        <view>30-1</view>
+    </view>
+    <view class="item">
+        <view class="icon iconfont icon-7"></view>
+        <view>7</view>
+    </view>
+    <view class="item">
+        <view class="icon iconfont icon-mian"></view>
+        <view>免</view>
+    </view>
+    
+    <view class="item">
+        <view class="icon iconfont icon-liwu"></view>
+        <view>礼物</view>
+    </view>
+    <view class="item">
+        <view class="icon iconfont icon-yuyin"></view>
+        <view>语音</view>
+    </view>
+</view>
