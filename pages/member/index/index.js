@@ -1,3 +1,4 @@
+const API = require('../../../utils/apiclient.js')
 var app = getApp()
 Page({
 	data: {
@@ -69,6 +70,8 @@ Page({
 	},
 	chooseImage: function () {
 		var that = this;
+		this.download();
+		return;
 		wx.chooseImage({
 			count: 1, // 默认9
 			sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
@@ -76,21 +79,31 @@ Page({
 			success: function (res) {
 				// 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
 				var tempFilePath = res.tempFilePaths[0];
-				new AV.File('file-name', {
-					blob: {
-						uri: tempFilePath,
-					},
-				}).save().then(
-					// file => console.log(file.url())
-					function (file) {
-						// 上传成功后，将所上传的头像设置更新到页面<image>中
-						var userInfo = that.data.userInfo;
-						userInfo.avatarUrl = file.url();
-						that.setData({
-							userInfo, userInfo
-						});
+				wx.uploadFile({
+					url: `${API.Host}/api/File/Upload2Qiniu`,
+					filePath: tempFilePath,
+					name: 'file',
+					success: function (res) {
+						console.log(res.data);
 					}
-					).catch(console.error);
+				})
+			}
+		})
+	},
+	download: function () {
+		var url = 'http://owrlb7i7j.bkt.clouddn.com/04dc2c41ba99447296e64457617d799c.png';
+		wx.downloadFile({
+			url: url,
+			success: function (res) {
+				console.log(res.tempFilePath);
+				if (res.statusCode === 200) {
+					wx.saveFile({
+						tempFilePath: res.tempFilePath,
+						success: (result) => {
+							console.log(result.savedFilePath);
+						}
+					})
+				}
 			}
 		})
 	},
@@ -102,6 +115,11 @@ Page({
 	navigateToDonate: function () {
 		wx.navigateTo({
 			url: '/pages/member/donate/donate'
+		});
+	},
+	navigateToMap: function () {
+		wx.navigateTo({
+			url: '/pages/address/map/map'
 		});
 	},
 	navigateToShare: function () {

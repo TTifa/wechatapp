@@ -31,6 +31,7 @@ const ApiPost = function (action, param, callback) {
 }
 
 module.exports = {
+    Host: _api.host,
     Request: Request,
     Get: ApiGet,
     Post: ApiPost
